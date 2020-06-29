@@ -83,10 +83,10 @@
                 [order[cellIndex], order[blankCellIndex]] = [order[blankCellIndex], order[cellIndex]];
                 if (JSON.stringify(order) == JSON.stringify(Array.from(panels.keys()))) {
                     panels[panels.length - 1].blank = false; // the last panel
-                    renderComplete(image, canvas);
+                    renderComplete();
                 }
                 else {
-                    render(image, canvas, panels, board, order);
+                    render();
                 }
             }
         }
