@@ -3,9 +3,12 @@
 
     const canvas = document.getElementById('puzzle');
     const context = canvas.getContext('2d');
-    const image = document.getElementById('source');
 
-    image.src = location.search.replace(/^\?/, '');
+    const image = new Image();
+    const image2 = new Image();
+    const imageUrls = atob(location.search.replace(/^\?/, '')).split('~');
+    image.src = imageUrls[0];
+    image2.src = imageUrls[1];
 
     let board;
     let panels;
@@ -60,6 +63,28 @@
             0, 0, image.width, image.height,
             0, 0, canvas.width, canvas.height,
         );
+        if (imageUrls[1]) {
+            setTimeout(() => {fadein(100);}, 3000);
+        }
+    }
+
+    const fadein = (repeat, current = 0) => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.save();
+        context.globalAlpha = 1 - (current / repeat);
+        context.drawImage(
+            image,
+            0, 0, image.width, image.height,
+            0, 0, canvas.width, canvas.height,
+        );
+        context.globalAlpha = current / repeat;
+        context.drawImage(
+            image2,
+            0, 0, image.width, image.height,
+            0, 0, canvas.width, canvas.height,
+        );
+        context.restore();
+        if (current < repeat) setTimeout(() => {fadein(repeat, current + 1);}, 1000 / 60);
     }
 
     const movePanel  = (e) => {
