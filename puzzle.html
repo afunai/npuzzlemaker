@@ -6,9 +6,24 @@
         <style>
             canvas {border: 5px solid black;}
         </style>
+        <script src="https://platform.twitter.com/widgets.js"></script>
     </head>
     <body>
         <canvas id="puzzle" width="600" height="600"></canvas>
         <script src="./puzzle.js"></script>
+        <div>
+            <div id="tweetButton"></div>
+            <script>
+                twttr.widgets.createShareButton(
+                    location.href,
+                    document.getElementById('tweetButton'),
+                    {
+                        text: 'パズルです',
+                        hashtags: 'nPuzzleMaker',
+                    }
+                );
+            </script>
+            <a href="./index.html">自分でパズルを作る</a>
+        </div>
     </body>
 </html>
