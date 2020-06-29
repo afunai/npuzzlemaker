@@ -5,6 +5,8 @@
     const context = canvas.getContext('2d');
     const image = document.getElementById('source');
 
+    image.src = location.search.replace(/^\?/, '');
+
     let board;
     let panels;
     let order;
@@ -100,6 +102,7 @@
     }
 
     image.onload = () => {
+        canvas.height = canvas.width * image.height / image.width;
         board = initMatrix(canvas.width / size, canvas.height / size);
         panels = initMatrix(image.width / size, image.height / size);
         order = Array.from(panels.keys());
